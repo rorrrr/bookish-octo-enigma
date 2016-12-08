@@ -39,6 +39,24 @@ class Artists
       return albums.map { |album| Albums.new( album ) }
     end 
 
+    def delete()
+      db = PG.connect ({ dbname: 'music_collection', host: 'localhost'})
+      sql = "DELETE FROM artists WHERE id = #{@id};"
+      db.exec(sql)
+      db.close()
+    end
+
+    def update()
+      db = PG.connect ({ dbname: 'music_collection', host: 'localhost'})
+      sql = 
+      "UPDATE artists SET (name 
+      = ('#{@name}')
+        WHERE id = '#{@id}';
+      "
+      db.exec(sql)
+      db.close()
+    end
+
     def self.delete_all
       db = PG.connect ({ dbname: 'music_collection', host: 'localhost'})
       sql = "DELETE FROM artists;"
